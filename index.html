@@ -6,8 +6,8 @@
 <title>2026 世界杯赛程</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f5f5;color:#333;font-size:14px;line-height:1.5;min-height:100vh;-webkit-tap-highlight-color:transparent}
-.banner{background:linear-gradient(135deg,#1a237e 0%,#283593 50%,#3949ab 100%);padding:24px 20px;color:#fff;text-align:center}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#f5f5f5;color:#333;font-size:14px;line-height:1.5;min-height:100vh}
+.banner{background:linear-gradient(135deg,#1a237e,#283593,#3949ab);padding:24px 20px;color:#fff;text-align:center}
 .banner h1{font-size:26px;font-weight:800;margin-bottom:4px}
 .banner p{font-size:14px;opacity:.85;margin:2px 0}
 .banner .date{font-size:12px;opacity:.6}
@@ -61,7 +61,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .gtw{overflow-x:auto;border-radius:8px;margin:12px 16px}
 .gtw::-webkit-scrollbar{display:none}
 .trh,.tr{display:grid;grid-template-columns:30px 1fr 32px 28px 28px 28px 32px 32px 36px 40px;align-items:center;font-size:12px;min-width:420px}
-.trh{background:#1a237e;color:#fff;padding:10px 6px;font-weight:600;position:sticky;top:0}
+.trh{background:#1a237e;color:#fff;padding:10px 6px;font-weight:600}
 .tr{padding:9px 6px;border-bottom:1px solid #f0f0f0;background:#fff}
 .tr:nth-child(2){background:#e8f5e9}
 .tr:nth-child(3){background:#f1f8e9}
@@ -70,7 +70,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .tc2{display:flex;align-items:center;gap:4px;overflow:hidden}
 .tc2 .fl{font-size:18px}
 .tc2 .tn{font-size:12px;font-weight:600;max-width:100px}
-.sc{text-align:center;color:#555}
 .pts{text-align:center;font-weight:800;color:#1a237e;font-size:13px}
 .pos{color:#2e7d32}.neg{color:#c62828}
 .bscroll{overflow-x:auto;padding:16px;display:flex;gap:14px}
@@ -124,7 +123,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .ccard input:focus{border-color:#1a237e;outline:none}
 .btn-p{width:100%;padding:12px;background:#1a237e;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer}
 .btn-p:active{background:#283593}
+.btn-s{border:none;background:none;color:#1a237e;font-size:14px;font-weight:600;cursor:pointer;text-decoration:underline;margin-right:16px}
 .btn-b{display:flex;align-items:center;gap:6px;padding:10px 16px;border:none;background:#fff;border-radius:10px;font-size:14px;font-weight:600;color:#333;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.06);margin:8px}
+.btn-row{display:flex;align-items:center;justify-content:space-between;padding:8px 16px}
+.status-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;font-size:11px;font-weight:600}
+.status-bar.ok{background:#e8f5e9;color:#2e7d32}
+.status-bar.off{background:#fff3e0;color:#e65100}
 .empty{text-align:center;padding:60px 40px;color:#aaa}
 .empty .ei{font-size:48px;display:block;margin-bottom:10px}
 .card{background:#fff;border-radius:12px;padding:16px;margin:12px 16px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
@@ -134,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 <body>
 <div id="a"></div>
 <script>
-// ====== 数据 ======
+// ====== 核心数据 ======
 var TEAMS=[
 {id:"USA",n:"美国",e:"USA",f:"🇺🇸",c:"CONCACAF",r:11,g:"A",co:"波切蒂诺",b:"季军"},{id:"MEX",n:"墨西哥",e:"Mexico",f:"🇲🇽",c:"CONCACAF",r:15,g:"A",co:"阿吉雷",b:"八强"},{id:"COL",n:"哥伦比亚",e:"Colombia",f:"🇨🇴",c:"CONMEBOL",r:12,g:"A",co:"洛伦佐",b:"八强"},{id:"NZL",n:"新西兰",e:"New Zealand",f:"🇳🇿",c:"OFC",r:92,g:"A",co:"贝泽利",b:"小组赛"},
 {id:"ENG",n:"英格兰",e:"England",f:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",c:"UEFA",r:4,g:"B",co:"卡尔斯利",b:"冠军"},{id:"IRN",n:"伊朗",e:"Iran",f:"🇮🇷",c:"AFC",r:22,g:"B",co:"加莱诺埃",b:"小组赛"},{id:"SEN",n:"塞内加尔",e:"Senegal",f:"🇸🇳",c:"CAF",r:20,g:"B",co:"西塞",b:"八强"},{id:"ECU",n:"厄瓜多尔",e:"Ecuador",f:"🇪🇨",c:"CONMEBOL",r:30,g:"B",co:"贝卡塞塞",b:"十六强"},
@@ -149,44 +153,113 @@ var TEAMS=[
 {id:"ITA",n:"意大利",e:"Italy",f:"🇮🇹",c:"UEFA",r:16,g:"K",co:"斯帕莱蒂",b:"冠军×4"},{id:"ALG",n:"阿尔及利亚",e:"Algeria",f:"🇩🇿",c:"CAF",r:33,g:"K",co:"贝尔马迪",b:"十六强"},{id:"QAT",n:"卡塔尔",e:"Qatar",f:"🇶🇦",c:"AFC",r:41,g:"K",co:"马克斯",b:"小组赛"},{id:"HON",n:"洪都拉斯",e:"Honduras",f:"🇭🇳",c:"CONCACAF",r:75,g:"K",co:"鲁埃达",b:"小组赛"},
 {id:"SUI",n:"瑞士",e:"Switzerland",f:"🇨🇭",c:"UEFA",r:17,g:"L",co:"雅金",b:"八强"},{id:"SRB",n:"塞尔维亚",e:"Serbia",f:"🇷🇸",c:"UEFA",r:29,g:"L",co:"斯托伊科维奇",b:"四强"},{id:"UZB",n:"乌兹别克斯坦",e:"Uzbekistan",f:"🇺🇿",c:"AFC",r:60,g:"L",co:"卡塔尼奇",b:"首次"},{id:"CAN",n:"加拿大",e:"Canada",f:"🇨🇦",c:"CONCACAF",r:44,g:"L",co:"马什",b:"小组赛"}
 ];
-var GS=["A","B","C","D","E","F","G","H","I","J","K","L"];
+var GS="ABCDEFGHIJKL".split("");
 var VS=["墨西哥城 阿兹特克","洛杉矶 SoFi","达拉斯 AT&T","西雅图 流明","迈阿密 硬石","亚特兰大 奔驰","休斯顿 NRG","费城 林肯金融","纽约 MetLife","温哥华 BC Place","多伦多 BMO","堪萨斯城 箭头"];
 var CN={UEFA:"欧洲",CONMEBOL:"南美洲",CONCACAF:"中北美",CAF:"非洲",AFC:"亚洲",OFC:"大洋洲"};
-
-// 生成比赛
-var MS=[],mid=1;
 var GT={};GS.forEach(function(g){GT[g]=TEAMS.filter(function(t){return t.g===g}).map(function(t){return t.id})});
 var SD={A:"2026-06-11",B:"2026-06-12",C:"2026-06-13",D:"2026-06-13",E:"2026-06-14",F:"2026-06-15",G:"2026-06-15",H:"2026-06-16",I:"2026-06-17",J:"2026-06-17",K:"2026-06-18",L:"2026-06-19"};
-function gm(g,d,t,v,ht,at,md,hs,as,st,r){return{id:mid++,g:g,date:d,time:t,venue:v,homeTeam:ht,awayTeam:at,matchday:md,homeScore:hs,awayScore:as,status:st||"upcoming",round:r||"group"}}
-function ad(d,n){var x=new Date(d+"T00:00:00");x.setDate(x.getDate()+n);return x.toISOString().split("T")[0]}
-GS.forEach(function(g){
-  var t=GT[g],d=SD[g],i=GS.indexOf(g);
-  MS.push(gm(g,d,"18:00",VS[i%12],t[0],t[1],1));
-  MS.push(gm(g,ad(d,1),"15:00",VS[(i+1)%12],t[2],t[3],1));
-  MS.push(gm(g,ad(d,8),"12:00",VS[(i+2)%12],t[0],t[2],2));
-  MS.push(gm(g,ad(d,9),"12:00",VS[(i+3)%12],t[3],t[1],2));
-  MS.push(gm(g,ad(d,16),"18:00",VS[(i+4)%12],t[0],t[3],3));
-  MS.push(gm(g,ad(d,16),"18:00",VS[(i+5)%12],t[1],t[2],3));
-});
-[{r:"32",c:16,s:"2026-07-03"},{r:"16",c:8,s:"2026-07-09"},{r:"QF",c:4,s:"2026-07-14"},{r:"SF",c:2,s:"2026-07-17"},{r:"3RD",c:1,s:"2026-07-18"},{r:"FINAL",c:1,s:"2026-07-19"}].forEach(function(k){
-  for(var i=0;i<k.c;i++){var d=ad(k.s,Math.floor(i/2));MS.push(gm(null,d,i%2===0?"12:00":"16:00","待定","TBD","TBD",null,null,null,"upcoming",k.r))}
-});
+
+function genLocalMatches(){
+  var MS=[],mid=1;
+  function gm(g,d,t,v,ht,at,md,hs,as,st,r){return{id:mid++,g:g,date:d,time:t,venue:v,homeTeam:ht,awayTeam:at,matchday:md,homeScore:hs,awayScore:as,status:st||"upcoming",round:r||"group"}}
+  function ad(d,n){var x=new Date(d+"T00:00:00");x.setDate(x.getDate()+n);return x.toISOString().split("T")[0]}
+  GS.forEach(function(g){
+    var t=GT[g],d=SD[g],i=GS.indexOf(g);
+    MS.push(gm(g,d,"18:00",VS[i%12],t[0],t[1],1));
+    MS.push(gm(g,ad(d,1),"15:00",VS[(i+1)%12],t[2],t[3],1));
+    MS.push(gm(g,ad(d,8),"12:00",VS[(i+2)%12],t[0],t[2],2));
+    MS.push(gm(g,ad(d,9),"12:00",VS[(i+3)%12],t[3],t[1],2));
+    MS.push(gm(g,ad(d,16),"18:00",VS[(i+4)%12],t[0],t[3],3));
+    MS.push(gm(g,ad(d,16),"18:00",VS[(i+5)%12],t[1],t[2],3));
+  });
+  [{r:"32",c:16,s:"2026-07-03"},{r:"16",c:8,s:"2026-07-09"},{r:"QF",c:4,s:"2026-07-14"},{r:"SF",c:2,s:"2026-07-17"},{r:"3RD",c:1,s:"2026-07-18"},{r:"FINAL",c:1,s:"2026-07-19"}].forEach(function(k){
+    for(var i=0;i<k.c;i++){var d=ad(k.s,Math.floor(i/2));MS.push(gm(null,d,i%2===0?"12:00":"16:00","待定","TBD","TBD",null,null,null,"upcoming",k.r))}
+  });
+  return MS
+}
+var MS=genLocalMatches();
+var USE_API=false;
+
+// ====== API 自动获取数据 ======
+function fetchFromAPI(){
+  var key=localStorage.getItem("wc_key")||"";
+  if(!key||key.length<10){console.log("无API密钥，使用本地数据");updateStatusBar(false);return}
+
+  // 带时间戳防止缓存
+  var ts=Date.now();
+  var url="https://api.football-data.org/v4/competitions/WC/matches?_t="+ts;
+
+  fetch(url,{headers:{"X-Auth-Token":key},cache:"no-store"})
+  .then(function(r){if(!r.ok){var e=new Error("HTTP "+r.status);e.code=r.status;throw e}return r.json()})
+  .then(function(data){
+    if(!data||!data.matches||data.matches.length===0){throw new Error("no data")}
+    MS=data.matches.map(function(m){
+      return {
+        id:m.id,
+        g:m.group?m.group.replace("GROUP_",""):null,
+        date:(m.utcDate||"").split("T")[0],
+        time:(m.utcDate||"").split("T")[1]?m.utcDate.split("T")[1].substring(0,5):"",
+        venue:m.venue||"待定",
+        homeTeam:m.homeTeam?m.homeTeam.tla||m.homeTeam.name:"TBD",
+        awayTeam:m.awayTeam?m.awayTeam.tla||m.awayTeam.name:"TBD",
+        matchday:m.matchday||null,
+        homeScore:m.score&&m.score.fullTime&&m.score.fullTime.home!=null?m.score.fullTime.home:null,
+        awayScore:m.score&&m.score.fullTime&&m.score.fullTime.away!=null?m.score.fullTime.away:null,
+        status:m.status==="FINISHED"?"finished":m.status==="IN_PLAY"||m.status==="PAUSED"?"live":"upcoming",
+        round:m.stage==="GROUP_STAGE"?"group":m.stage?m.stage.toLowerCase():null
+      }
+    });
+    USE_API=true;
+    localStorage.setItem("wc_data",JSON.stringify(MS));
+    localStorage.setItem("wc_sync",Date.now());
+    updateStatusBar(true);
+    render();
+    console.log("✅ API数据获取成功："+MS.length+" 场比赛");
+  })
+  .catch(function(err){
+    console.warn("API获取失败："+err.message+"，尝试缓存");
+    // 尝试本地缓存
+    try{var cached=JSON.parse(localStorage.getItem("wc_data")||"null");if(cached&&cached.length>0){MS=cached;USE_API=true;updateStatusBar(true,true);render();return}}catch(e){}
+    // 最终降级
+    MS=genLocalMatches();USE_API=false;
+    updateStatusBar(false);
+    render();
+  })
+}
+
+function updateStatusBar(online,cached){
+  var sb=document.getElementById("status-info");
+  if(!sb)return;
+  var now=new Date();
+  var syncStr="";
+  try{var st=parseInt(localStorage.getItem("wc_sync")||"0");if(st){var dt=new Date(st);syncStr=" (同步于 "+dt.getHours()+":"+String(dt.getMinutes()).padStart(2,"0")+")"}}catch(e){}
+  if(online){
+    sb.className="status-bar ok";
+    sb.innerHTML="<span>🟢 在线数据"+(cached?" (缓存)"+syncStr:" (实时)")+"</span><span>自动更新中</span>";
+  } else {
+    sb.className="status-bar off";
+    sb.innerHTML="<span>🟡 离线模式 (本地数据)</span><button class='btn-s' onclick='goSettings()'>配置API→</button>";
+  }
+}
 
 // ====== 工具 ======
 function $(s){return document.querySelector(s)}
 function $$(s){return document.querySelectorAll(s)}
 function fd(d){var dt=new Date(d+"T00:00:00");return(dt.getMonth()+1)+"月"+dt.getDate()+"日 周"+"日一二三四五六"[dt.getDay()]}
 function ft(t){return t?t.substring(0,5):""}
-function gt(id){return TEAMS.find(function(t){return t.id===id})||{n:id,f:"🏳️",c:"-",r:"-",b:"-",co:"-"}}
+function gt(id){
+  if(!id||id==="TBD")return{n:"待定",f:"❓",r:"-",c:"-",b:"-",co:"-"};
+  return TEAMS.find(function(t){return t.id===id})||{n:id,f:"🏳️",r:"-",c:"-",b:"-",co:"-"}
+}
 
 // ====== 状态 ======
 var cp="home",cm=null,ct=null;
 
 // ====== 渲染 ======
-function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!==undefined)e.innerHTML=html;return e}
 function render(){
   var a=$("#a");a.innerHTML="";
-  a.innerHTML=banner()+tabbar()+
+  a.innerHTML='<div id="status-info" class="status-bar"></div>'+
+    banner()+tabbar()+
     '<div class="pg on" id="pg-home">'+pageHome()+'</div>'+
     '<div class="pg" id="pg-schedule">'+pageSchedule()+'</div>'+
     '<div class="pg" id="pg-groups">'+pageGroups()+'</div>'+
@@ -196,12 +269,12 @@ function render(){
     '<div class="pg" id="pg-settings">'+pageSettings()+'</div>'+
     (cm?pageMatchDetail(cm):"")+(ct?pageTeamDetail(ct):"");
   sp(cp);
+  updateStatusBar(USE_API);
 }
-
-function banner(){return '<div class="banner"><h1>⚽ 2026 世界杯</h1><p>美国🇺🇸 · 加拿大🇨🇦 · 墨西哥🇲🇽</p><div class="date">2026年6月11日 - 7月19日</div><div class="stats"><div class="s"><span class="n">48</span><span class="l">参赛队</span></div><div class="s"><span class="n">12</span><span class="l">小组</span></div><div class="s"><span class="n">104</span><span class="l">比赛</span></div></div></div>'}
+function banner(){return '<div class="banner"><h1>⚽ 2026 世界杯</h1><p>美国🇺🇸 · 加拿大🇨🇦 · 墨西哥🇲🇽</p><div class="date">2026年6月11日 — 7月19日 · '+MS.length+'场比赛</div><div class="stats"><div class="s"><span class="n">48</span><span class="l">参赛队</span></div><div class="s"><span class="n">12</span><span class="l">小组</span></div><div class="s"><span class="n">104</span><span class="l">比赛</span></div></div></div>'}
 function tabbar(){var tabs=[{id:"home",l:"🏠 首页"},{id:"schedule",l:"📅 赛程"},{id:"groups",l:"📊 排名"},{id:"bracket",l:"🏆 对阵"},{id:"teams",l:"⚽ 球队"},{id:"scorers",l:"🥅 射手榜"}];var h='<div class="tabs">';tabs.forEach(function(t){h+='<button class="'+(t.id===cp?"on":"")+'" onclick="sw(\''+t.id+'\')">'+t.l+'</button>'});return h+'</div>'}
 function sw(p){cp=p;cm=null;ct=null;render()}
-function sp(p){$$(".pg").forEach(function(e){e.classList.remove("on")});var el=$("#pg-"+p);if(el)el.classList.add("on");$$(".tabs button").forEach(function(b){b.classList.remove("on")});var idx=["home","schedule","groups","bracket","teams","scorers","settings"].indexOf(p);var btns=$$(".tabs button");if(idx>=0&&btns[idx])btns[idx].classList.add("on")}
+function sp(p){$$(".pg").forEach(function(e){e.classList.remove("on")});var el=$("#pg-"+p);if(el)el.classList.add("on");$$(".tabs button").forEach(function(b,i){b.classList.toggle("on",["home","schedule","groups","bracket","teams","scorers"][i]===p)})}
 
 function mcard(m){
   var ht=gt(m.homeTeam),at=gt(m.awayTeam),st=m.status||"upcoming";
@@ -209,29 +282,29 @@ function mcard(m){
   var sc={upcoming:"st-up",live:"st-live",finished:"st-end"};
   var rm={group:m.g?m.g+"组":"","32":"32强","16":"16强",QF:"1/4决赛",SF:"半决赛","3RD":"三四名",FINAL:"决赛"};
   var rt=rm[m.round]||"";
+  var now=new Date();var matchTime=new Date(m.date+"T"+(m.time||"00:00"));
+  if(st==="upcoming"&&now>matchTime&&m.homeScore==null&&m.homeTeam!=="TBD"){st="live";sc.live="st-live"}
   var center=m.homeScore!=null
     ?'<div class="scr"><span>'+m.homeScore+'</span><span>-</span><span>'+m.awayScore+'</span></div>'
     :'<span class="mt">'+ft(m.time)+'</span><span class="md">'+fd(m.date)+'</span>';
   return '<div class="mcard" onclick="vmatch('+m.id+')"><div class="mhd">'+(rt?'<span class="rb">'+rt+'</span>':'')+'<span class="venue">'+(m.venue||"待定")+'</span><span class="stag '+sc[st]+'">'+sm[st]+'</span></div><div class="mbody"><div class="tc"><span class="fl">'+ht.f+'</span><span class="tn">'+ht.n+'</span></div><div class="mctr">'+center+'</div><div class="tc r"><span class="fl">'+at.f+'</span><span class="tn">'+at.n+'</span></div></div></div>'
 }
-
 function vmatch(id){cm=MS.find(function(m){return m.id===id});render();sp("match-detail")}
 function vteam(id){ct=TEAMS.find(function(t){return t.id===id});render();sp("team-detail")}
+function goSettings(){sw("settings")}
 
 function pageHome(){
   var h='<div class="nav">';
   [{i:"📅",t:"赛程",p:"schedule"},{i:"📊",t:"排名",p:"groups"},{i:"🏆",t:"对阵",p:"bracket"},{i:"⚽",t:"球队",p:"teams"},{i:"🥅",t:"射手榜",p:"scorers"},{i:"⚙️",t:"设置",p:"settings"}].forEach(function(n){
     h+='<div class="ni" onclick="sw(\''+n.p+'\')"><span class="ic">'+n.i+'</span><span class="tx">'+n.t+'</span></div>'
   });
-  h+='</div><div class="stitle">📋 当前赛程</div>';
-  var today="2026-06-12";
-  var tm=MS.filter(function(m){return m.date===today&&m.round==="group"});
-  if(tm.length===0)tm=MS.filter(function(m){return m.round==="group"}).slice(0,6);
-  tm.forEach(function(m){h+=mcard(m)});
+  h+='</div><div class="stitle">📋 最新赛程</div>';
+  // 显示前6场比赛
+  var allSorted=MS.slice().sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")});
+  var latest=allSorted.slice(0,8);
+  latest.forEach(function(m){h+=mcard(m)});
   h+='<div class="stitle">🔥 热门球队</div><div class="tscroll">';
-  ["ARG","BRA","FRA","ENG","GER","ESP","ITA","POR","JPN","KOR","USA","MEX"].forEach(function(id){
-    var t=gt(id);h+='<div class="tpill" onclick="vteam(\''+id+'\')"><span class="fl">'+t.f+'</span><span class="tx">'+t.n+'</span></div>'
-  });
+  ["ARG","BRA","FRA","ENG","GER","ESP","ITA","POR","JPN","KOR","USA","MEX"].forEach(function(id){var t=gt(id);h+='<div class="tpill" onclick="vteam(\''+id+'\')"><span class="fl">'+t.f+'</span><span class="tx">'+t.n+'</span></div>'});
   return h+'</div>'
 }
 
@@ -241,31 +314,25 @@ function pageSchedule(){
     h+='<button class="ftag" onclick="sfRound(\''+r.v+'\')">'+r.l+'</button>'
   });
   h+='</div><div id="scontent"></div>';
-  setTimeout(function(){sfRound("group")},0);
-  return h
+  setTimeout(function(){sfRound("group")},0);return h
 }
 var _sr="group",_sg="all";
 function sfRound(r){_sr=r;_sg="all";sfRefresh()}
 function sfGroup(g){_sg=g;sfRefresh()}
 function sfRefresh(){
   var el=$("#sround");if(!el)return;
-  el.querySelectorAll(".ftag").forEach(function(b){b.classList.remove("on")});
-  var idx={all:0,group:1,"32":2,"16":3,QF:4,SF:5,FINAL:6}[_sr];
-  if(el.children[idx])el.children[idx].classList.add("on");
-
-  var sc=$("#scontent");if(!sc)return;
-  var h="";
+  el.querySelectorAll(".ftag").forEach(function(b,i){b.classList.toggle("on",["all","group","32","16","QF","SF","FINAL"][i]===_sr)});
+  var sc=$("#scontent");if(!sc)return;var h="";
   if(_sr==="group"){
     h+='<div class="filters">';
-    h+='<button class="ftag '+( _sg==="all"?"on":"")+'" onclick="sfGroup(\'all\')">全部</button>';
-    GS.forEach(function(g){h+='<button class="ftag '+( _sg===g?"on":"")+'" onclick="sfGroup(\''+g+'\')">'+g+'组</button>'});
+    h+='<button class="ftag '+(_sg==="all"?"on":"")+'" onclick="sfGroup(\'all\')">全部</button>';
+    GS.forEach(function(g){h+='<button class="ftag '+(_sg===g?"on":"")+'" onclick="sfGroup(\''+g+'\')">'+g+'组</button>'});
     h+='</div>'
   }
   var fm=MS.filter(function(m){return _sr==="all"||m.round===_sr});
   if(_sg!=="all"&&_sr==="group")fm=fm.filter(function(m){return m.g===_sg});
   fm.sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||"").localeCompare(b.time||"")});
-  var ld="";
-  fm.forEach(function(m){
+  var ld="";fm.forEach(function(m){
     if(m.date!==ld){ld=m.date;h+='<div class="dh"><span class="dt">'+fd(m.date)+'</span>'+(m.matchday?'<span class="db">第'+m.matchday+'轮</span>':'')+'</div>'}
     h+=mcard(m)
   });
@@ -276,16 +343,12 @@ function sfRefresh(){
 function pageGroups(){
   var h='<div class="filters" id="gfilter">';
   GS.forEach(function(g){h+='<button class="ftag" onclick="sgGroup(\''+g+'\')">'+g+'组</button>'});
-  h+='</div><div id="gcontent"></div>';
-  setTimeout(function(){sgGroup("A")},0);
-  return h
+  h+='</div><div id="gcontent"></div>';setTimeout(function(){sgGroup("A")},0);return h
 }
 var _gg="A";
 function sgGroup(g){_gg=g;
-  var el=$("#gfilter");if(!el)return;
-  el.querySelectorAll(".ftag").forEach(function(b,i){b.classList.toggle("on",GS[i]===g)});
-  var gc=$("#gcontent");if(!gc)return;
-  var h='<div class="card"><div class="stitle">'+g+'组 积分榜</div>'+standings(g)+'</div>';
+  var el=$("#gfilter");if(el)el.querySelectorAll(".ftag").forEach(function(b,i){b.classList.toggle("on",GS[i]===g)});
+  var gc=$("#gcontent");if(!gc)return;var h='<div class="card"><div class="stitle">'+g+'组 积分榜</div>'+standings(g)+'</div>';
   h+='<div class="stitle">'+g+'组 赛程</div>';
   MS.filter(function(m){return m.g===g&&m.round==="group"}).sort(function(a,b){return a.matchday-b.matchday}).forEach(function(m){h+=mcard(m)});
   gc.innerHTML=h
@@ -299,134 +362,66 @@ function standings(gid){
     if(!ho||!aw)return;ho.p++;aw.p++;ho.gf+=m.homeScore;ho.ga+=m.awayScore;aw.gf+=m.awayScore;aw.ga+=m.homeScore;
     if(m.homeScore>m.awayScore){ho.w++;aw.l++;ho.pts+=3}else if(m.homeScore<m.awayScore){aw.w++;ho.l++;aw.pts+=3}else{ho.d++;aw.d++;ho.pts++;aw.pts++}
   });
-  st.forEach(function(s){s.gd=s.gf-s.ga});
-  st.sort(function(a,b){return b.pts-a.pts||b.gd-a.gd||b.gf-a.gf});
-  var h='<div class="gtw"><div class="trh"><span class="rc">#</span><span>球队</span><span class="sc">赛</span><span class="sc">胜</span><span class="sc">平</span><span class="sc">负</span><span class="sc">进</span><span class="sc">失</span><span class="sc">净</span><span class="pts">分</span></div>';
-  st.forEach(function(s,i){
-    var gc=s.gd>0?"pos":s.gd<0?"neg":"";
-    h+='<div class="tr"><span class="rc">'+(i+1)+'</span><span class="tc2"><span class="fl">'+s.f+'</span><span class="tn">'+s.n+'</span></span><span class="sc">'+s.p+'</span><span class="sc">'+s.w+'</span><span class="sc">'+s.d+'</span><span class="sc">'+s.l+'</span><span class="sc">'+s.gf+'</span><span class="sc">'+s.ga+'</span><span class="sc '+gc+'">'+(s.gd>0?"+"+s.gd:s.gd)+'</span><span class="pts">'+s.pts+'</span></div>'
-  });
+  st.forEach(function(s){s.gd=s.gf-s.ga});st.sort(function(a,b){return b.pts-a.pts||b.gd-a.gd||b.gf-a.gf});
+  var h='<div class="gtw"><div class="trh"><span class="rc">#</span><span>球队</span><span style="text-align:center">赛</span><span style="text-align:center">胜</span><span style="text-align:center">平</span><span style="text-align:center">负</span><span style="text-align:center">进</span><span style="text-align:center">失</span><span style="text-align:center">净</span><span class="pts">分</span></div>';
+  st.forEach(function(s,i){var gc=s.gd>0?"pos":s.gd<0?"neg":"";h+='<div class="tr"><span class="rc">'+(i+1)+'</span><span class="tc2"><span class="fl">'+s.f+'</span><span class="tn">'+s.n+'</span></span><span style="text-align:center;color:#555">'+s.p+'</span><span style="text-align:center;color:#555">'+s.w+'</span><span style="text-align:center;color:#555">'+s.d+'</span><span style="text-align:center;color:#555">'+s.l+'</span><span style="text-align:center;color:#555">'+s.gf+'</span><span style="text-align:center;color:#555">'+s.ga+'</span><span class="'+gc+'" style="text-align:center;color:#555">'+(s.gd>0?"+"+s.gd:s.gd)+'</span><span class="pts">'+s.pts+'</span></div>'});
   return h+'</div>'
 }
 
 function pageBracket(){
-  var rounds=[{r:"32",l:"32强"},{r:"16",l:"16强"},{r:"QF",l:"1/4决赛"},{r:"SF",l:"半决赛"},{r:"3RD",l:"🥉 三四名"},{r:"FINAL",l:"🏆 决赛"}];
-  var h='<div class="bscroll">';
-  rounds.forEach(function(rd){
-    h+='<div class="bround"><div class="stitle">'+rd.l+'</div>';
-    MS.filter(function(m){return m.round===rd.r}).forEach(function(m){
-      var ht=gt(m.homeTeam),at=gt(m.awayTeam);
-      var cls="bmatch"+(rd.r==="FINAL"?" fin":"");
-      var hw=m.homeScore>m.awayScore?" win":"",aw=m.awayScore>m.homeScore?" win":"";
-      h+='<div class="'+cls+'" onclick="vmatch('+m.id+')">';
-      h+='<div class="bteam'+hw+'"><span class="fl">'+ht.f+'</span><span class="bn">'+ht.n+'</span>'+(m.homeScore!=null?'<span class="bs">'+m.homeScore+'</span>':'')+'</div>';
-      h+='<div class="bteam'+aw+'"><span class="fl">'+at.f+'</span><span class="bn">'+at.n+'</span>'+(m.awayScore!=null?'<span class="bs">'+m.awayScore+'</span>':'')+'</div>';
-      h+='</div>'
-    });
-    h+='</div>'
-  });
+  var rounds=[{r:"32",l:"32强"},{r:"16",l:"16强"},{r:"QF",l:"1/4决赛"},{r:"SF",l:"半决赛"},{r:"3RD",l:"🥉 三四名"},{r:"FINAL",l:"🏆 决赛"}];var h='<div class="bscroll">';
+  rounds.forEach(function(rd){h+='<div class="bround"><div class="stitle">'+rd.l+'</div>';
+    MS.filter(function(m){return m.round===rd.r}).forEach(function(m){var ht=gt(m.homeTeam),at=gt(m.awayTeam);
+      h+='<div class="bmatch'+(rd.r==="FINAL"?" fin":"")+'" onclick="vmatch('+m.id+')">';
+      h+='<div class="bteam'+(m.homeScore>m.awayScore?" win":"")+'"><span class="fl">'+ht.f+'</span><span class="bn">'+ht.n+'</span>'+(m.homeScore!=null?'<span class="bs">'+m.homeScore+'</span>':'')+'</div>';
+    h+='<div class="bteam'+(m.awayScore>m.homeScore?" win":"")+'"><span class="fl">'+at.f+'</span><span class="bn">'+at.n+'</span>'+(m.awayScore!=null?'<span class="bs">'+m.awayScore+'</span>':'')+'</div></div>'});h+='</div>'});
   return h+'</div>'
 }
 
-function pageTeams(){
-  var h='<div class="filters" id="tfilter">';
-  [{v:"all",l:"全部"},{v:"UEFA",l:"欧洲"},{v:"CONMEBOL",l:"南美"},{v:"CONCACAF",l:"中北美"},{v:"CAF",l:"非洲"},{v:"AFC",l:"亚洲"},{v:"OFC",l:"大洋洲"}].forEach(function(f){
-    h+='<button class="ftag" onclick="sfConf(\''+f.v+'\')">'+f.l+'</button>'
-  });
-  h+='</div><div id="tcontent"></div>';
-  setTimeout(function(){sfConf("all")},0);
-  return h
-}
+function pageTeams(){var h='<div class="filters" id="tfilter">';
+  [{v:"all",l:"全部"},{v:"UEFA",l:"欧洲"},{v:"CONMEBOL",l:"南美"},{v:"CONCACAF",l:"中北美"},{v:"CAF",l:"非洲"},{v:"AFC",l:"亚洲"},{v:"OFC",l:"大洋洲"}].forEach(function(f){h+='<button class="ftag" onclick="sfConf(\''+f.v+'\')">'+f.l+'</button>'});
+  h+='</div><div id="tcontent"></div>';setTimeout(function(){sfConf("all")},0);return h}
 var _tf="all";
-function sfConf(f){_tf=f;
-  var el=$("#tfilter");if(!el)return;
-  el.querySelectorAll(".ftag").forEach(function(b){b.classList.remove("on")});
-  var idx={all:0,UEFA:1,CONMEBOL:2,CONCACAF:3,CAF:4,AFC:5,OFC:6}[_tf];
-  if(el.children[idx])el.children[idx].classList.add("on");
-  var tc=$("#tcontent");if(!tc)return;
-  var ts=TEAMS.slice();
-  if(_tf!=="all")ts=ts.filter(function(t){return t.c===_tf});
-  ts.sort(function(a,b){return a.g.localeCompare(b.g)||a.r-b.r});
-  var h="";
-  ts.forEach(function(t){
-    h+='<div class="trow" onclick="vteam(\''+t.id+'\')"><div class="tl"><span class="fl">'+t.f+'</span><div class="ti"><span class="tn">'+t.n+'</span><span class="en">'+t.e+'</span></div></div><div class="tr-right"><span class="gb">'+t.g+'组</span><span class="rk">#'+t.r+'</span></div></div>'
-  });
-  tc.innerHTML=h
-}
+function sfConf(f){_tf=f;var el=$("#tfilter");if(el)el.querySelectorAll(".ftag").forEach(function(b,i){b.classList.toggle("on",["all","UEFA","CONMEBOL","CONCACAF","CAF","AFC","OFC"][i]===_tf)});
+  var tc=$("#tcontent");if(!tc)return;var ts=TEAMS.slice();if(_tf!=="all")ts=ts.filter(function(t){return t.c===_tf});
+  ts.sort(function(a,b){return a.g.localeCompare(b.g)||a.r-b.r});var h="";
+  ts.forEach(function(t){h+='<div class="trow" onclick="vteam(\''+t.id+'\')"><div class="tl"><span class="fl">'+t.f+'</span><div class="ti"><span class="tn">'+t.n+'</span><span class="en">'+t.e+'</span></div></div><div class="tr-right"><span class="gb">'+t.g+'组</span><span class="rk">#'+t.r+'</span></div></div>'});
+  tc.innerHTML=h}
 
-function pageScorers(){
-  var scorers=[{p:"梅西",t:"ARG",g:0,a:0,m:0},{p:"姆巴佩",t:"FRA",g:0,a:0,m:0},{p:"哈兰德",t:"NOR",g:0,a:0,m:0},{p:"凯恩",t:"ENG",g:0,a:0,m:0},{p:"C罗",t:"POR",g:0,a:0,m:0},{p:"维尼修斯",t:"BRA",g:0,a:0,m:0},{p:"贝林厄姆",t:"ENG",g:0,a:0,m:0},{p:"孙兴慜",t:"KOR",g:0,a:0,m:0},{p:"穆西亚拉",t:"GER",g:0,a:0,m:0},{p:"劳塔罗",t:"ARG",g:0,a:0,m:0}];
-  var h="";var medals=["🥇","🥈","🥉"];
-  scorers.forEach(function(s,i){
-    var t=gt(s.t);
-    h+='<div class="scard"><div class="sc-rk">'+(i<3?medals[i]:i+1)+'</div><div class="sc-info"><div class="sc-nm">'+s.p+'</div><div class="sc-tm"><span class="fl" style="font-size:18px">'+t.f+'</span>'+t.n+'</div></div><div class="sc-stats"><div class="sc-st"><div class="sv">'+s.g+'</div><div class="sl">进球</div></div><div class="sc-st"><div class="sv">'+s.a+'</div><div class="sl">助攻</div></div><div class="sc-st"><div class="sv">'+s.m+'</div><div class="sl">出场</div></div></div></div>'
-  });
-  return h
-}
+function pageScorers(){var scorers=[{p:"梅西",t:"ARG",g:0,a:0,m:0},{p:"姆巴佩",t:"FRA",g:0,a:0,m:0},{p:"哈兰德",t:"NOR",g:0,a:0,m:0},{p:"凯恩",t:"ENG",g:0,a:0,m:0},{p:"C罗",t:"POR",g:0,a:0,m:0},{p:"维尼修斯",t:"BRA",g:0,a:0,m:0},{p:"贝林厄姆",t:"ENG",g:0,a:0,m:0},{p:"孙兴慜",t:"KOR",g:0,a:0,m:0},{p:"穆西亚拉",t:"GER",g:0,a:0,m:0},{p:"劳塔罗",t:"ARG",g:0,a:0,m:0}];var h="",med=["🥇","🥈","🥉"];
+  scorers.forEach(function(s,i){var t=gt(s.t);h+='<div class="scard"><div class="sc-rk">'+(i<3?med[i]:i+1)+'</div><div class="sc-info"><div class="sc-nm">'+s.p+'</div><div class="sc-tm"><span class="fl" style="font-size:18px">'+t.f+'</span>'+t.n+'</div></div><div class="sc-stats"><div class="sc-st"><div class="sv">'+s.g+'</div><div class="sl">进球</div></div><div class="sc-st"><div class="sv">'+s.a+'</div><div class="sl">助攻</div></div><div class="sc-st"><div class="sv">'+s.m+'</div><div class="sl">出场</div></div></div></div>'});return h}
 
-function pageMatchDetail(m){
-  if(!m)return"";
-  var ht=gt(m.homeTeam),at=gt(m.awayTeam),st=m.status||"upcoming";
-  var sm={upcoming:"未开始",live:"进行中",finished:"已结束"};
-  var sc={upcoming:"st-up",live:"st-live",finished:"st-end"};
-  var rm={"32":"32强淘汰赛","16":"16强淘汰赛",QF:"1/4决赛",SF:"半决赛","3RD":"三四名决赛",FINAL:"决赛"};
-  var rt=rm[m.round]||(m.g?m.g+"组 · 第"+m.matchday+"轮":"");
-  var score=m.homeScore!=null
-    ?'<div class="scr" style="font-size:44px"><span>'+m.homeScore+'</span><span>-</span><span>'+m.awayScore+'</span></div>'
-    :'<span style="font-size:36px;font-weight:800;color:#ccc">VS</span>';
-  var h='<div class="pg on" id="pg-match-detail"><button class="btn-b" onclick="cm=null;render();sp(\'home\')">⬅ 返回</button>';
+function pageMatchDetail(m){if(!m)return"";var ht=gt(m.homeTeam),at=gt(m.awayTeam),st=m.status||"upcoming";var sm={upcoming:"未开始",live:"进行中",finished:"已结束"},sc={upcoming:"st-up",live:"st-live",finished:"st-end"};var rm={"32":"32强淘汰赛","16":"16强淘汰赛",QF:"1/4决赛",SF:"半决赛","3RD":"三四名决赛",FINAL:"决赛"};var rt=rm[m.round]||(m.g?m.g+"组 · 第"+m.matchday+"轮":"");var score=m.homeScore!=null?'<div class="scr" style="font-size:44px"><span>'+m.homeScore+'</span><span>-</span><span>'+m.awayScore+'</span></div>':'<span style="font-size:36px;font-weight:800;color:#ccc">VS</span>';var h='<div class="pg on" id="pg-match-detail"><button class="btn-b" onclick="cm=null;render();sp(\'home\')">⬅ 返回</button>';
   h+='<div class="banner"><p>'+rt+'</p><div class="date">📍 '+m.venue+' | '+fd(m.date)+' '+ft(m.time)+'</div></div>';
-  h+='<div class="det" style="background:#fff;padding:24px">';
-  h+='<div class="mbody"><div class="tc" style="flex-direction:column"><span class="fl" style="font-size:48px">'+ht.f+'</span><span class="tn" style="font-size:18px;max-width:none">'+ht.n+'</span><span style="font-size:12px;color:#999">世界第'+ht.r+'</span></div>';
-  h+='<div class="mctr">'+score+'</div>';
-  h+='<div class="tc" style="flex-direction:column"><span class="fl" style="font-size:48px">'+at.f+'</span><span class="tn" style="font-size:18px;max-width:none">'+at.n+'</span><span style="font-size:12px;color:#999">世界第'+at.r+'</span></div></div>';
-  h+='<span class="stag '+sc[st]+'" style="margin-top:12px;display:inline-block">'+sm[st]+'</span></div>';
-  h+='<div class="dcard"><div class="stitle">⚔️ 球队对比</div>';
-  h+='<div class="drow"><span class="dl">世界排名</span><span class="dv">'+ht.r+' vs '+at.r+'</span></div>';
-  h+='<div class="drow"><span class="dl">所属大洲</span><span class="dv">'+(CN[ht.c]||ht.c)+' vs '+(CN[at.c]||at.c)+'</span></div>';
-  h+='<div class="drow"><span class="dl">历史最佳</span><span class="dv">'+ht.b+' vs '+at.b+'</span></div>';
-  h+='<div class="drow"><span class="dl">主教练</span><span class="dv">'+ht.co+' vs '+at.co+'</span></div>';
-  return h+'</div></div>'
-}
-
-function pageTeamDetail(t){
-  if(!t)return"";
-  var h='<div class="pg on" id="pg-team-detail"><button class="btn-b" onclick="ct=null;render();sp(\'home\')">⬅ 返回</button>';
-  h+='<div class="thdr"><span class="fl">'+t.f+'</span><div class="tn">'+t.n+'</div><div style="font-size:13px;opacity:.7">'+t.e+'</div>';
-  h+='<div class="badges"><span class="badge">'+t.g+'组</span><span class="badge">世界第 '+t.r+'</span><span class="badge">'+(CN[t.c]||t.c)+'</span></div></div>';
-  h+='<div class="dcard"><div class="stitle">📋 球队信息</div>';
-  h+='<div class="drow"><span class="dl">主教练</span><span class="dv">'+t.co+'</span></div>';
-  h+='<div class="drow"><span class="dl">所属大洲</span><span class="dv">'+(CN[t.c]||t.c)+'</span></div>';
-  h+='<div class="drow"><span class="dl">世界排名</span><span class="dv">'+t.r+'</span></div>';
-  h+='<div class="drow"><span class="dl">历史最佳</span><span class="dv">'+t.b+'</span></div></div>';
-  h+='<div class="stitle">📅 小组赛程</div>';
-  MS.filter(function(m){return(m.homeTeam===t.id||m.awayTeam===t.id)&&m.round==="group"}).forEach(function(m){h+=mcard(m)});
-  return h+'</div>'
-}
+  h+='<div class="det" style="background:#fff;padding:24px"><div class="mbody"><div class="tc" style="flex-direction:column"><span class="fl" style="font-size:48px">'+ht.f+'</span><span class="tn" style="font-size:18px;max-width:none">'+ht.n+'</span><span style="font-size:12px;color:#999">世界第'+ht.r+'</span></div><div class="mctr">'+score+'</div><div class="tc" style="flex-direction:column"><span class="fl" style="font-size:48px">'+at.f+'</span><span class="tn" style="font-size:18px;max-width:none">'+at.n+'</span><span style="font-size:12px;color:#999">世界第'+at.r+'</span></div></div><span class="stag '+sc[st]+'" style="margin-top:12px;display:inline-block">'+sm[st]+'</span></div>';
+  h+='<div class="dcard"><div class="stitle">⚔️ 球队对比</div><div class="drow"><span class="dl">世界排名</span><span class="dv">'+ht.r+' vs '+at.r+'</span></div><div class="drow"><span class="dl">所属大洲</span><span class="dv">'+(CN[ht.c]||ht.c)+' vs '+(CN[at.c]||at.c)+'</span></div><div class="drow"><span class="dl">历史最佳</span><span class="dv">'+ht.b+' vs '+at.b+'</span></div><div class="drow"><span class="dl">主教练</span><span class="dv">'+ht.co+' vs '+at.co+'</span></div></div></div>';return h}
+function pageTeamDetail(t){if(!t)return"";var h='<div class="pg on" id="pg-team-detail"><button class="btn-b" onclick="ct=null;render();sp(\'home\')">⬅ 返回</button><div class="thdr"><span class="fl">'+t.f+'</span><div class="tn">'+t.n+'</div><div style="font-size:13px;opacity:.7">'+t.e+'</div><div class="badges"><span class="badge">'+t.g+'组</span><span class="badge">世界第 '+t.r+'</span><span class="badge">'+(CN[t.c]||t.c)+'</span></div></div><div class="dcard"><div class="stitle">📋 球队信息</div><div class="drow"><span class="dl">主教练</span><span class="dv">'+t.co+'</span></div><div class="drow"><span class="dl">所属大洲</span><span class="dv">'+(CN[t.c]||t.c)+'</span></div><div class="drow"><span class="dl">世界排名</span><span class="dv">'+t.r+'</span></div><div class="drow"><span class="dl">历史最佳</span><span class="dv">'+t.b+'</span></div></div><div class="stitle">📅 小组赛程</div>';MS.filter(function(m){return(m.homeTeam===t.id||m.awayTeam===t.id)&&m.round==="group"}).forEach(function(m){h+=mcard(m)});return h+'</div>'}
 
 function pageSettings(){
-  var h='<div class="banner"><h1>⚙️ 数据设置</h1><div class="date">配置在线数据源，自动更新赛程</div></div>';
-  h+='<div class="cfg"><div class="ccard"><div class="stitle">🔑 API 密钥配置</div>';
-  h+='<div class="cl">Football-Data.org 免费 API 密钥（比赛结束后自动更新比分）：</div>';
-  h+='<input id="akey" placeholder="粘贴你的 API 密钥">';
-  h+='<button class="btn-p" onclick="testApi()">测试连接 & 刷新数据</button>';
-  h+='<div style="font-size:11px;color:#999;margin-top:8px">免费注册获取密钥：<a href="https://www.football-data.org/client/register" target="_blank" style="color:#1a237e">football-data.org</a></div>';
-  h+='</div></div>';
-  return h
+  var h='<div class="banner"><h1>⚙️ 数据设置</h1><div class="date">接入免费API自动更新比分</div></div><div class="cfg"><div class="ccard"><div class="stitle">🔑 Football-Data.org API 密钥</div><div class="cl">免费注册获取密钥（10请求/分钟）：<br><a href="https://www.football-data.org/client/register" target="_blank" style="color:#1a237e">https://www.football-data.org/client/register</a></div>';
+  var savedKey="";try{savedKey=localStorage.getItem("wc_key")||""}catch(e){}
+  h+='<input id="akey" placeholder="粘贴你的 API 密钥" value="'+savedKey+'">';
+  h+='<button class="btn-p" onclick="saveKey()">保存密钥 & 刷新数据</button>';
+  h+='<div style="font-size:11px;color:#999;margin-top:8px">密钥保存在浏览器中，不会上传到任何服务器</div></div>';
+  h+='<div class="ccard"><div class="stitle">📋 使用说明</div><div style="font-size:13px;color:#666;line-height:2">1. 点击上方链接注册免费账号<br>2. 在个人页面复制 API Key<br>3. 粘贴到输入框并点击保存<br>4. 页面将自动获取实时比分<br>5. 每5分钟自动刷新一次数据</div><button class="btn-p" style="margin-top:12px" onclick="forceRefresh()">🔄 手动刷新数据</button></div></div>';return h
 }
+function saveKey(){var k=$("#akey").value;if(!k||k.length<10){alert("请输入有效的 API 密钥");return}localStorage.setItem("wc_key",k);fetchFromAPI();render();sp("home")}
+function forceRefresh(){fetchFromAPI();render();sp("home")}
 
-function testApi(){
-  var key=$("#akey")?$("#akey").value:"";
-  if(!key||key.length<10){alert("请输入有效的 API 密钥");return}
-  try{localStorage.setItem("wc_key",key)}catch(e){}
-  fetch("https://api.football-data.org/v4/competitions/WC/matches",{headers:{"X-Auth-Token":key}})
-  .then(function(r){if(r.ok)return r.json();throw new Error("HTTP "+r.status)})
-  .then(function(d){alert("✅ 连接成功！获取到 "+((d.matches||[]).length)+" 场比赛数据")})
-  .catch(function(e){alert("❌ 请求失败："+e.message)})
-}
+// ====== 自动定时刷新 ======
+setInterval(function(){
+  if(localStorage.getItem("wc_key")){fetchFromAPI()}
+}, 5*60*1000); // 每5分钟
 
-// 启动
-render();
+// ====== 启动 ======
+(function init(){
+  var key=localStorage.getItem("wc_key");
+  // 先渲染本地数据确保页面不空白
+  try{var cached=JSON.parse(localStorage.getItem("wc_data")||"null");if(cached&&cached.length>0){MS=cached;USE_API=true}}catch(e){}
+  render();
+  // 然后异步获取最新数据
+  if(key){fetchFromAPI()}else{updateStatusBar(false)}
+})();
 </script>
 </body>
 </html>
