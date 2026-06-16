@@ -126,7 +126,7 @@ function ft(t){ return t?t.substring(0,5):"" }
 function gt(id){
   if(!id||id==="TBD") return {n:"待定",f:"❓"};
   var t=TEAM_MAP[id];
-  if(t) return {n:t.cnName||t.shortName||t.name,f:t.flag||"",id:t.tla};
+  if(t) return {n:t.cnName||t.name,f:t.flag||"🏳️",id:t.tla};
   return {n:id,f:"🏳️"}
 }
 var CN={UEFA:"欧洲",CONMEBOL:"南美洲",CONCACAF:"中北美",CAF:"非洲",AFC:"亚洲",OFC:"大洋洲"};
@@ -326,7 +326,7 @@ function pageBracket(MS){
 
 function pageTeams(){
   var h='<div id="tlist">';
-  TEAMS_API.forEach(function(t){ h+='<div class="trow" onclick="vteam(\x27'+t.tla+'\x27)"><div class="tl"><span class="fl">'+t.shortName+'</span><div class="ti"><span class="tn">'+t.name+'</span></div></div></div>' });
+  TEAMS_API.forEach(function(t){ h+='<div class="trow" onclick="vteam(\x27'+t.tla+'\x27)"><div class="tl"><span class="fl">'+t.flag+'</span><div class="ti"><span class="tn">'+t.cnName+'</span></div></div></div>' });
   return h+'</div>'
 }
 
